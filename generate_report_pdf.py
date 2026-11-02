@@ -327,7 +327,7 @@ def build_html_report(md_content):
     </div>
 
     <div class="cover-title-box">
-      <div class="cover-type">LAPORAN TUGAS BESAR INTEGRASI SISTEM</div>
+      <div class="cover-type">LAPORAN TUGAS BESAR CLOUD COMPUTING (KELAS C3)</div>
       <div class="cover-title">
         IMPLEMENTASI OTOMASI MANAJEMEN KONTEN BERBASIS AUTONOMOUS AI AGENT DENGAN MENGINTEGRASIKAN WORDPRESS, HERMES AGENT, DAN 9ROUTER MENGGUNAKAN DOCKER DAN TELEGRAM BOT
       </div>
@@ -353,7 +353,7 @@ def build_html_report(md_content):
         <tr>
           <td><strong>Mata Kuliah</strong></td>
           <td>:</td>
-          <td>Integrasi Sistem / Komputasi Terdistribusi</td>
+          <td><strong>Cloud Computing (Kelas C3)</strong></td>
         </tr>
         <tr>
           <td><strong>Repository GitHub</strong></td>

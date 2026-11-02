@@ -312,6 +312,7 @@ Laporan akademik resmi tugas besar ini telah disusun sesuai format karya ilmiah 
 
 * **Nama Mahasiswa** : **Ichwal**
 * **Stambuk / NIM** : **13020230049**
+* **Mata Kuliah** : **Cloud Computing (Kelas C3)**
 * **Program Studi** : Teknik Informatika / Ilmu Komputer
 * **Fakultas** : Fakultas Ilmu Komputer
 * **Institusi** : Universitas Muslim Indonesia (UMI), Makassar

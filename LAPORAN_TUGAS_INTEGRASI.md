@@ -1,4 +1,4 @@
-# LAPORAN TUGAS BESAR INTEGRASI SISTEM
+# LAPORAN TUGAS BESAR CLOUD COMPUTING (KELAS C3)
 ## IMPLEMENTASI OTOMASI MANAJEMEN KONTEN BERBASIS AUTONOMOUS AI AGENT DENGAN MENGINTEGRASIKAN WORDPRESS, HERMES AGENT, DAN 9ROUTER MENGGUNAKAN DOCKER DAN TELEGRAM BOT
 
 <p align="center">
@@ -13,7 +13,7 @@
 * **Program Studi** : Teknik Informatika / Ilmu Komputer
 * **Fakultas** : Fakultas Ilmu Komputer (FIK)
 * **Institusi** : Universitas Muslim Indonesia (UMI) Makassar
-* **Mata Kuliah** : Integrasi Sistem / Komputasi Terdistribusi
+* **Mata Kuliah** : Cloud Computing (Kelas C3)
 * **Repository GitHub** : [https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN](https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN)
 * **Tanggal Penyelesaian** : 2 November 2026
 
