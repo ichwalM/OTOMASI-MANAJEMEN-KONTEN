@@ -1,15 +1,21 @@
 # LAPORAN TUGAS BESAR INTEGRASI SISTEM
 ## IMPLEMENTASI OTOMASI MANAJEMEN KONTEN BERBASIS AUTONOMOUS AI AGENT DENGAN MENGINTEGRASIKAN WORDPRESS, HERMES AGENT, DAN 9ROUTER MENGGUNAKAN DOCKER DAN TELEGRAM BOT
 
+<p align="center">
+  <img src="logo_umi.png" alt="Logo Universitas Muslim Indonesia" width="160" />
+</p>
+
 ---
 
-**Disusun Oleh:**
-* **Nama** : Ichwal
+### IDENTITAS MAHASISWA & PROYEK
+* **Nama Mahasiswa** : Ichwal
 * **Stambuk / NIM** : 13020230049
 * **Program Studi** : Teknik Informatika / Ilmu Komputer
-* **Institusi** : Universitas Muslim Indonesia (UMI)
-* **Tanggal Penyelesaian** : 2 November 2026
+* **Fakultas** : Fakultas Ilmu Komputer (FIK)
+* **Institusi** : Universitas Muslim Indonesia (UMI) Makassar
+* **Mata Kuliah** : Integrasi Sistem / Komputasi Terdistribusi
 * **Repository GitHub** : [https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN](https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN)
+* **Tanggal Penyelesaian** : 2 November 2026
 
 ---
 

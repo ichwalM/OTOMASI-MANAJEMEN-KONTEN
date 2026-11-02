@@ -6,10 +6,25 @@ Uses markdown_it, clean Mermaid SVG injection, and Google Chrome headless.
 
 import os
 import re
+import base64
 import subprocess
 from markdown_it import MarkdownIt
 
 def build_html_report(md_content):
+    # Load UMI logo as base64 data URI
+    logo_path = "/home/ichwal/Documents/tugas-project/logo_umi.png"
+    logo_base64 = ""
+    if os.path.exists(logo_path):
+        with open(logo_path, "rb") as f:
+            b64_str = base64.b64encode(f.read()).decode("utf-8")
+            logo_base64 = f"data:image/png;base64,{b64_str}"
+
+    # For report body, start from DAFTAR ISI so the cover is not duplicated on page 2
+    if "## DAFTAR ISI" in md_content:
+        body_content = md_content[md_content.index("## DAFTAR ISI"):]
+    else:
+        body_content = md_content
+
     # Extract mermaid blocks cleanly using alphanumeric placeholders (no underscores)
     mermaid_blocks = []
     def mermaid_replacer(match):
@@ -18,7 +33,7 @@ def build_html_report(md_content):
         mermaid_blocks.append(code)
         return f"\n\nMERMAIDTOKENXYZ{idx}\n\n"
 
-    processed_md = re.sub(r"```mermaid\n(.*?)\n```", mermaid_replacer, md_content, flags=re.DOTALL)
+    processed_md = re.sub(r"```mermaid\n(.*?)\n```", mermaid_replacer, body_content, flags=re.DOTALL)
     
     # Render Markdown to HTML
     md = MarkdownIt("commonmark").enable("table")
@@ -75,74 +90,85 @@ def build_html_report(md_content):
 
     /* Cover Page Styling */
     .cover-page {{
-      height: 92vh;
+      height: 94vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
       text-align: center;
       page-break-after: always;
-      padding: 30px 10px;
+      padding: 10px 10px 15px 10px;
       box-sizing: border-box;
     }}
     .cover-header {{
-      margin-top: 15px;
+      margin-top: 5px;
     }}
     .cover-inst {{
-      font-size: 14pt;
-      font-weight: 700;
+      font-size: 15pt;
+      font-weight: 800;
       letter-spacing: 1.5px;
       color: #0f172a;
       text-transform: uppercase;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }}
     .cover-dept {{
       font-size: 11pt;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 1px;
       color: #2563eb;
       text-transform: uppercase;
     }}
+    .cover-logo-box {{
+      margin: 12px 0 8px 0;
+    }}
+    .cover-logo {{
+      width: 120px;
+      height: auto;
+      object-fit: contain;
+    }}
     .cover-title-box {{
-      margin: 40px 0;
-      padding: 25px 20px;
+      margin: 10px 0;
+      padding: 15px 20px;
       border-top: 3px solid #1e3a8a;
       border-bottom: 3px solid #1e3a8a;
-      max-width: 90%;
+      max-width: 92%;
     }}
     .cover-type {{
-      font-size: 12pt;
-      font-weight: 600;
+      font-size: 11pt;
+      font-weight: 700;
       color: #475569;
       letter-spacing: 2px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       text-transform: uppercase;
     }}
     .cover-title {{
-      font-size: 16pt;
+      font-size: 13.5pt;
       font-weight: 800;
-      line-height: 1.4;
+      line-height: 1.35;
       color: #0f172a;
       text-transform: uppercase;
     }}
     .cover-author-box {{
-      margin-bottom: 20px;
+      margin: 8px 0 12px 0;
       background: #f8fafc;
-      padding: 18px 40px;
+      padding: 12px 30px;
       border-radius: 8px;
       border: 1px solid #e2e8f0;
+      width: 82%;
+      max-width: 520px;
     }}
     .cover-author-table {{
       margin: 0 auto;
+      width: 100%;
       text-align: left;
-      font-size: 11pt;
+      font-size: 10pt;
     }}
     .cover-author-table td {{
-      padding: 4px 12px;
+      padding: 3px 8px;
     }}
     .cover-footer {{
-      margin-bottom: 20px;
-      font-size: 11pt;
+      margin-bottom: 10px;
+      font-size: 10.5pt;
       font-weight: 600;
       color: #334155;
       letter-spacing: 1px;
@@ -296,6 +322,10 @@ def build_html_report(md_content):
       <div class="cover-dept">FAKULTAS ILMU KOMPUTER &bull; TEKNIK INFORMATIKA</div>
     </div>
 
+    <div class="cover-logo-box">
+      <img src="{logo_base64}" alt="Logo UMI" class="cover-logo" />
+    </div>
+
     <div class="cover-title-box">
       <div class="cover-type">LAPORAN TUGAS BESAR INTEGRASI SISTEM</div>
       <div class="cover-title">
@@ -328,7 +358,7 @@ def build_html_report(md_content):
         <tr>
           <td><strong>Repository GitHub</strong></td>
           <td>:</td>
-          <td><a href="https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN" style="color: #2563eb; text-decoration: none;">github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN</a></td>
+          <td><a href="https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN" style="color: #2563eb; text-decoration: none; font-weight: 600;">github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN</a></td>
         </tr>
       </table>
     </div>
