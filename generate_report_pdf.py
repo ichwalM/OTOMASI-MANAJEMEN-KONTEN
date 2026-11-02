@@ -60,7 +60,7 @@ def build_html_report(md_content):
     mermaid.initialize({{
       startOnLoad: true,
       theme: 'neutral',
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
+      fontFamily: '"Times New Roman", Times, "Liberation Serif", serif',
       fontSize: 12,
       flowchart: {{ htmlLabels: true, curve: 'basis' }},
       sequence: {{ mirrorActors: false }}
@@ -72,16 +72,16 @@ def build_html_report(md_content):
       margin: 20mm 20mm 25mm 20mm;
       @bottom-center {{
         content: counter(page);
-        font-family: 'Inter', sans-serif;
-        font-size: 9pt;
+        font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
+        font-size: 10pt;
         color: #64748b;
       }}
     }}
     
     body {{
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      font-size: 10.5pt;
-      line-height: 1.65;
+      font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
+      font-size: 12pt;
+      line-height: 1.5;
       color: #1e293b;
       background-color: #ffffff;
       margin: 0;
@@ -99,23 +99,24 @@ def build_html_report(md_content):
       page-break-after: always;
       padding: 10px 10px 15px 10px;
       box-sizing: border-box;
+      font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
     }}
     .cover-header {{
       margin-top: 5px;
     }}
     .cover-inst {{
-      font-size: 15pt;
-      font-weight: 800;
-      letter-spacing: 1.5px;
+      font-size: 16pt;
+      font-weight: 700;
+      letter-spacing: 1px;
       color: #0f172a;
       text-transform: uppercase;
       margin-bottom: 4px;
     }}
     .cover-dept {{
-      font-size: 11pt;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: #2563eb;
+      font-size: 12pt;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #1e3a8a;
       text-transform: uppercase;
     }}
     .cover-logo-box {{
@@ -134,16 +135,16 @@ def build_html_report(md_content):
       max-width: 92%;
     }}
     .cover-type {{
-      font-size: 11pt;
+      font-size: 12pt;
       font-weight: 700;
       color: #475569;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       margin-bottom: 8px;
       text-transform: uppercase;
     }}
     .cover-title {{
       font-size: 13.5pt;
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.35;
       color: #0f172a;
       text-transform: uppercase;
@@ -153,7 +154,7 @@ def build_html_report(md_content):
       background: #f8fafc;
       padding: 12px 30px;
       border-radius: 8px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #cbd5e1;
       width: 82%;
       max-width: 520px;
     }}
@@ -161,32 +162,34 @@ def build_html_report(md_content):
       margin: 0 auto;
       width: 100%;
       text-align: left;
-      font-size: 10pt;
+      font-size: 11pt;
+      font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
     }}
     .cover-author-table td {{
       padding: 3px 8px;
     }}
     .cover-footer {{
       margin-bottom: 10px;
-      font-size: 10.5pt;
-      font-weight: 600;
+      font-size: 11pt;
+      font-weight: 700;
       color: #334155;
       letter-spacing: 1px;
     }}
 
     /* Main Content Headings */
     h1, h2, h3, h4 {{
+      font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
       color: #0f172a;
       font-weight: 700;
-      margin-top: 24pt;
+      margin-top: 22pt;
       margin-bottom: 10pt;
       page-break-after: avoid;
     }}
 
     h1 {{
-      font-size: 17pt;
+      font-size: 16pt;
       border-bottom: 2px solid #1e293b;
-      padding-bottom: 8px;
+      padding-bottom: 6px;
     }}
 
     h2 {{
@@ -194,30 +197,32 @@ def build_html_report(md_content):
       color: #1e3a8a;
       border-bottom: 1px solid #cbd5e1;
       padding-bottom: 4px;
-      margin-top: 26pt;
+      margin-top: 24pt;
     }}
 
     h3 {{
-      font-size: 11.5pt;
-      color: #334155;
-      margin-top: 18pt;
+      font-size: 12pt;
+      color: #1e293b;
+      margin-top: 16pt;
     }}
 
     h4 {{
-      font-size: 10.5pt;
-      color: #475569;
+      font-size: 11.5pt;
+      color: #334155;
     }}
 
     p {{
       margin-top: 0;
       margin-bottom: 10pt;
       text-align: justify;
+      text-justify: inter-word;
     }}
 
     ul, ol {{
       margin-top: 0;
       margin-bottom: 10pt;
       padding-left: 24px;
+      text-align: justify;
     }}
 
     li {{
@@ -232,6 +237,7 @@ def build_html_report(md_content):
       border-radius: 4px;
       font-style: italic;
       color: #334155;
+      font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
     }}
 
     /* Tables */
@@ -239,7 +245,8 @@ def build_html_report(md_content):
       width: 100%;
       border-collapse: collapse;
       margin: 16pt 0;
-      font-size: 9pt;
+      font-size: 10pt;
+      font-family: 'Times New Roman', Times, 'Liberation Serif', serif;
       page-break-inside: avoid;
     }}
 
