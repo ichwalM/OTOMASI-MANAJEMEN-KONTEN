@@ -1,0 +1,96 @@
+services:
+  9router:
+    image: decolua/9router:latest
+    container_name: 9router
+    restart: unless-stopped
+    environment:
+      - PORT=${ROUTER_PORT:-11000}
+      - DATA_DIR=/app/data
+      - INITIAL_PASSWORD=${ROUTER_PASSWORD:-admin123456}
+    ports:
+      - "${ROUTER_PORT:-11000}:${ROUTER_PORT:-11000}"
+    volumes:
+      - ./data/9router:/app/data
+    networks:
+      - hermes-net
+
+  db:
+    image: mariadb:10.11
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${DB_NAME:-wordpress}
+      - MYSQL_USER=${DB_USER:-wpuser}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-wppassword}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-rootsecret}
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+    networks:
+      - hermes-net
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=${DB_USER:-wpuser}
+      - WORDPRESS_DB_PASSWORD=${DB_PASSWORD:-wppassword}
+      - WORDPRESS_DB_NAME=${DB_NAME:-wordpress}
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_CONFIG_EXTRA=define('WP_HOME', 'http://localhost:${WP_PORT:-10000}'); define('WP_SITEURL', 'http://localhost:${WP_PORT:-10000}');
+    ports:
+      - "${WP_PORT:-10000}:80"
+    volumes:
+      - ./data/wordpress:/var/www/html
+    networks:
+      - hermes-net
+
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-agent
+    restart: unless-stopped
+    depends_on:
+      - 9router
+      - wordpress
+    command: ["hermes", "gateway", "run"]
+    environment:
+      - OPENAI_BASE_URL=http://9router:${ROUTER_PORT:-11000}/v1
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-9router}
+      - MODEL=${HERMES_MODEL:-gemini-2.5-flash}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
+      - WORDPRESS_URL=http://wordpress:80
+      - WORDPRESS_USER=${WP_ADMIN_USER:-admin}
+      - WORDPRESS_APP_PASSWORD=${WP_APP_PASSWORD}
+    volumes:
+      - ./data/hermes:/opt/data
+      - ./hermes/skills/wordpress-manager:/opt/data/skills/wordpress-manager
+      - ./hermes/skills/wordpress-manager:/opt/data/.hermes/skills/wordpress-manager
+    networks:
+      - hermes-net
+
+  wpcli:
+    image: wordpress:cli
+    container_name: wpcli
+    user: "33:33"
+    depends_on:
+      - db
+      - wordpress
+    environment:
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=${DB_USER:-wpuser}
+      - WORDPRESS_DB_PASSWORD=${DB_PASSWORD:-wppassword}
+      - WORDPRESS_DB_NAME=${DB_NAME:-wordpress}
+    volumes:
+      - ./data/wordpress:/var/www/html
+    networks:
+      - hermes-net
+    profiles:
+      - tools
+
+networks:
+  hermes-net:
+    driver: bridge

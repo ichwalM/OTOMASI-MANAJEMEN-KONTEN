@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Laporan Tugas Integrasi Sistem - Ichwal (13020230049)</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
+      fontSize: 12,
+      flowchart: { htmlLabels: true, curve: 'basis' },
+      sequence: { mirrorActors: false }
+    });
+  </script>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm 20mm 25mm 20mm;
+      @bottom-center {
+        content: counter(page);
+        font-family: 'Inter', sans-serif;
+        font-size: 9pt;
+        color: #64748b;
+      }
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.65;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Cover Page Styling */
+    .cover-page {
+      height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      page-break-after: always;
+      padding: 30px 10px;
+      box-sizing: border-box;
+    }
+    .cover-header {
+      margin-top: 15px;
+    }
+    .cover-inst {
+      font-size: 14pt;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #0f172a;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .cover-dept {
+      font-size: 11pt;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #2563eb;
+      text-transform: uppercase;
+    }
+    .cover-title-box {
+      margin: 40px 0;
+      padding: 25px 20px;
+      border-top: 3px solid #1e3a8a;
+      border-bottom: 3px solid #1e3a8a;
+      max-width: 90%;
+    }
+    .cover-type {
+      font-size: 12pt;
+      font-weight: 600;
+      color: #475569;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .cover-title {
+      font-size: 16pt;
+      font-weight: 800;
+      line-height: 1.4;
+      color: #0f172a;
+      text-transform: uppercase;
+    }
+    .cover-author-box {
+      margin-bottom: 20px;
+      background: #f8fafc;
+      padding: 18px 40px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .cover-author-table {
+      margin: 0 auto;
+      text-align: left;
+      font-size: 11pt;
+    }
+    .cover-author-table td {
+      padding: 4px 12px;
+    }
+    .cover-footer {
+      margin-bottom: 20px;
+      font-size: 11pt;
+      font-weight: 600;
+      color: #334155;
+      letter-spacing: 1px;
+    }
+
+    /* Main Content Headings */
+    h1, h2, h3, h4 {
+      color: #0f172a;
+      font-weight: 700;
+      margin-top: 24pt;
+      margin-bottom: 10pt;
+      page-break-after: avoid;
+    }
+
+    h1 {
+      font-size: 17pt;
+      border-bottom: 2px solid #1e293b;
+      padding-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 13.5pt;
+      color: #1e3a8a;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 4px;
+      margin-top: 26pt;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      color: #334155;
+      margin-top: 18pt;
+    }
+
+    h4 {
+      font-size: 10.5pt;
+      color: #475569;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 10pt;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 10pt;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 4pt;
+    }
+
+    blockquote {
+      margin: 12pt 0;
+      padding: 10pt 16pt;
+      background: #f1f5f9;
+      border-left: 4px solid #2563eb;
+      border-radius: 4px;
+      font-style: italic;
+      color: #334155;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16pt 0;
+      font-size: 9pt;
+      page-break-inside: avoid;
+    }
+
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Code Blocks */
+    pre {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 8.5pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      page-break-inside: avoid;
+      margin: 12pt 0;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 8.5pt;
+      background-color: #f1f5f9;
+      color: #0369a1;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    pre code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Mermaid Diagrams */
+    .mermaid-container {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16pt 0;
+      text-align: center;
+      page-break-inside: avoid;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .mermaid svg {
+      max-width: 100% !important;
+      height: auto !important;
+      margin: 0 auto;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 20pt 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Halaman Sampul Formal -->
+  <div class="cover-page">
+    <div class="cover-header">
+      <div class="cover-inst">UNIVERSITAS MUSLIM INDONESIA</div>
+      <div class="cover-dept">FAKULTAS ILMU KOMPUTER &bull; TEKNIK INFORMATIKA</div>
+    </div>
+
+    <div class="cover-title-box">
+      <div class="cover-type">LAPORAN TUGAS BESAR INTEGRASI SISTEM</div>
+      <div class="cover-title">
+        IMPLEMENTASI OTOMASI MANAJEMEN KONTEN BERBASIS AUTONOMOUS AI AGENT DENGAN MENGINTEGRASIKAN WORDPRESS, HERMES AGENT, DAN 9ROUTER MENGGUNAKAN DOCKER DAN TELEGRAM BOT
+      </div>
+    </div>
+
+    <div class="cover-author-box">
+      <table class="cover-author-table">
+        <tr>
+          <td><strong>Nama Mahasiswa</strong></td>
+          <td>:</td>
+          <td><strong>Ichwal</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Stambuk / NIM</strong></td>
+          <td>:</td>
+          <td><strong>13020230049</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Program Studi</strong></td>
+          <td>:</td>
+          <td>Teknik Informatika / Ilmu Komputer</td>
+        </tr>
+        <tr>
+          <td><strong>Mata Kuliah</strong></td>
+          <td>:</td>
+          <td>Integrasi Sistem / Komputasi Terdistribusi</td>
+        </tr>
+        <tr>
+          <td><strong>Repository GitHub</strong></td>
+          <td>:</td>
+          <td><a href="https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN" style="color: #2563eb; text-decoration: none;">github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="cover-footer">
+      MAKASSAR<br>
+      TAHUN 2026 / 2027
+    </div>
+  </div>
+
+  <!-- Konten Utama Laporan -->
+  <div class="report-body">
+    <h1>LAPORAN TUGAS BESAR INTEGRASI SISTEM</h1>
+<h2>IMPLEMENTASI OTOMASI MANAJEMEN KONTEN BERBASIS AUTONOMOUS AI AGENT DENGAN MENGINTEGRASIKAN WORDPRESS, HERMES AGENT, DAN 9ROUTER MENGGUNAKAN DOCKER DAN TELEGRAM BOT</h2>
+<hr />
+<p><strong>Disusun Oleh:</strong></p>
+<ul>
+<li><strong>Nama</strong> : Ichwal</li>
+<li><strong>Stambuk / NIM</strong> : 13020230049</li>
+<li><strong>Program Studi</strong> : Teknik Informatika / Ilmu Komputer</li>
+<li><strong>Institusi</strong> : Universitas Muslim Indonesia (UMI)</li>
+<li><strong>Tanggal Penyelesaian</strong> : 2 November 2026</li>
+<li><strong>Repository GitHub</strong> : <a href="https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN">https://github.com/ichwalM/OTOMASI-MANAJEMEN-KONTEN</a></li>
+</ul>
+<hr />
+<h2>DAFTAR ISI</h2>
+<ol>
+<li><a href="#bab-i-pendahuluan">BAB I: PENDAHULUAN</a>
+<ul>
+<li>1.1 Latar Belakang</li>
+<li>1.2 Rumusan Masalah</li>
+<li>1.3 Tujuan Proyek</li>
+<li>1.4 Batasan Masalah &amp; Manfaat</li>
+</ul>
+</li>
+<li><a href="#bab-ii-landasan-teori--konsep-integrasi-sistem">BAB II: LANDASAN TEORI &amp; KONSEP INTEGRASI SISTEM</a>
+<ul>
+<li>2.1 Landasan Teori Komponen</li>
+<li>2.2 Konsep Integrasi Multi-Container &amp; Isolasi Docker Networking</li>
+<li>2.3 Konsep Integrasi Telegram Messaging Gateway (Hermes Agent)</li>
+<li>2.4 Konsep Integrasi 9Router AI Gateway &amp; Token Optimization</li>
+<li>2.5 Konsep Integrasi WordPress REST API &amp; Headless CMS Pattern</li>
+<li>2.6 Konsep Cognitive Tool Calling &amp; Autonomous Skill Execution</li>
+<li>2.7 Topologi Arsitektur &amp; Sequence Diagram Interaksi</li>
+</ul>
+</li>
+<li><a href="#bab-iii-langkah-langkah-implementasi--konfigurasi">BAB III: LANGKAH-LANGKAH IMPLEMENTASI &amp; KONFIGURASI</a>
+<ul>
+<li>3.1 Prasyarat Sistem &amp; Dependensi</li>
+<li>3.2 Struktur Direktori Proyek</li>
+<li>3.3 Orkestrasi Layanan Menggunakan Docker Compose</li>
+<li>3.4 Konfigurasi Lingkungan Terpusat (<code>.env</code>)</li>
+<li>3.5 Pengembangan Custom Skill Hermes (<code>SKILL.md</code> &amp; <code>wp_manager.py</code>)</li>
+<li>3.6 Konfigurasi AI Gateway 9Router &amp; Upstream Google Gemini</li>
+<li>3.7 Integrasi WordPress REST API &amp; Application Password</li>
+<li>3.8 Script Inisialisasi Otomatis (<code>setup.sh</code>)</li>
+</ul>
+</li>
+<li><a href="#bab-iv-pengujian-hasil-dan-analisis-masalah">BAB IV: PENGUJIAN, HASIL, DAN ANALISIS MASALAH</a>
+<ul>
+<li>4.1 Rencana Pengujian</li>
+<li>4.2 Uji Otomatisasi Sistem (<code>test_integration.py</code>)</li>
+<li>4.3 Uji Coba Fungsional Telegram ke WordPress</li>
+<li>4.4 Analisis Kendala &amp; Solusi Teknis (Troubleshooting)</li>
+</ul>
+</li>
+<li><a href="#bab-v-kesimpulan-dan-saran">BAB V: KESIMPULAN DAN SARAN</a>
+<ul>
+<li>5.1 Kesimpulan</li>
+<li>5.2 Saran Pengembangan</li>
+</ul>
+</li>
+<li><a href="#lampiran-kode-sumber-utama">LAMPIRAN: KODE SUMBER UTAMA</a></li>
+</ol>
+<hr />
+<h2>BAB I: PENDAHULUAN</h2>
+<h3>1.1 Latar Belakang</h3>
+<p>Perkembangan teknologi kecerdasan buatan, khususnya <em>Large Language Models</em> (LLM) dan agen otonom (<em>autonomous AI agents</em>), telah membuka paradigma baru dalam otomatisasi tugas-tugas digital. Salah satu tugas yang menyita waktu bagi pengelola website adalah penulisan, pemformatan, dan penerbitan konten ke dalam platform <em>Content Management System</em> (CMS) seperti WordPress.</p>
+<p>Secara konvensional, pembuatan artikel mengharuskan pengguna membuka dashboard CMS, login, membuat draf, memformat HTML/teks, dan mempublikasikannya secara manual. Di sisi lain, integrasi langsung antara model bahasa komersial dan antarmuka percakapan sering kali menghadapi tantangan terkait fragmentasi penyedia API, limitasi kuota, kompleksitas manajemen kredensial, serta masalah keamanan jaringan.</p>
+<p>Untuk mengatasi permasalahan tersebut, proyek ini mengusulkan sebuah arsitektur sistem terintegrasi berbasis container Docker yang menggabungkan:</p>
+<ol>
+<li><strong>Telegram Messenger</strong> sebagai antarmuka pengguna (<em>mobile user interface</em>) yang praktis tanpa memerlukan dashboard frontend kustom.</li>
+<li><strong>Hermes Agent</strong> dari Nous Research sebagai agen otonom pengambil keputusan, pengelola sesi percakapan, dan eksekutor alat (<em>tool-calling engine</em>).</li>
+<li><strong>9Router</strong> sebagai AI gateway <em>reverse-proxy</em> cerdas yang menyatukan kunci API model bahasa (Google Gemini) menjadi endpoint standar <em>OpenAI-compatible</em> lokal.</li>
+<li><strong>WordPress CMS &amp; MariaDB</strong> sebagai layer penyajian konten publik yang dimanipulasi secara headless melalui REST API.</li>
+</ol>
+<h3>1.2 Rumusan Masalah</h3>
+<ol>
+<li>Bagaimana merancang arsitektur multi-container yang menghubungkan WordPress, Hermes Agent, dan 9Router dalam satu jaringan internal yang aman dan terisolasi?</li>
+<li>Bagaimana cara mengonfigurasi 9Router agar dapat menjadi penyedia endpoint API tunggal bagi Hermes Agent dengan backend Google Gemini?</li>
+<li>Bagaimana mengonfigurasi messaging gateway Telegram di dalam container Hermes Agent dengan otorisasi berbasis User ID guna mencegah akses tidak sah?</li>
+<li>Bagaimana mekanisme otentikasi dan manipulasi konten WordPress REST API pada lingkungan HTTP lokal tanpa membuka celah keamanan kata sandi utama?</li>
+</ol>
+<h3>1.3 Tujuan Proyek</h3>
+<ol>
+<li>Mengembangkan sistem orkestrasi multi-container menggunakan Docker Compose yang menghubungkan layanan WordPress, MariaDB, 9Router, dan Hermes Agent.</li>
+<li>Membangun custom skill (<em>WordPress Manager</em>) untuk Hermes Agent sesuai standar <em>agentskills.io</em>.</li>
+<li>Mengonfigurasi 9Router sebagai AI API proxy lokal pada port 11000 dan WordPress pada port 10000.</li>
+<li>Menghubungkan messaging gateway container ke bot Telegram dengan keamanan verifikasi pengguna terdaftar (<em>whitelisting</em>).</li>
+<li>Memvalidasi sistem secara end-to-end melalui pengujian perintah percakapan di Telegram hingga konten terbit secara otomatis di WordPress.</li>
+</ol>
+<h3>1.4 Batasan Masalah &amp; Manfaat</h3>
+<ul>
+<li><strong>Batasan Masalah</strong>:
+<ul>
+<li>Sistem dijalankan pada lingkungan server/host lokal berbasis Docker Engine Linux.</li>
+<li>Model bahasa upstream menggunakan Google Gemini melalui 9Router.</li>
+<li>Antarmuka kontrol berfokus pada aplikasi Telegram menggunakan protokol Long Polling.</li>
+</ul>
+</li>
+<li><strong>Manfaat</strong>:
+<ul>
+<li>Memberikan efisiensi waktu dalam publikasi konten web di mana saja langsung dari smartphone.</li>
+<li>Menjaga keamanan server karena pengguna tidak perlu membuka port database atau kredensial CMS ke publik.</li>
+<li>Menjadi studi kasus nyata penerapan AI autonomous agent dalam workflow industri konten.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2>BAB II: LANDASAN TEORI &amp; KONSEP INTEGRASI SISTEM</h2>
+<h3>2.1 Landasan Teori Komponen</h3>
+<h4>1. WordPress CMS &amp; WordPress REST API</h4>
+<p>WordPress adalah sistem manajemen konten terpopuler di dunia. Sejak versi 4.7, WordPress menyertakan REST API bawaan (<code>/wp-json/wp/v2/</code>) yang memungkinkan sistem eksternal membaca, menulis, memperbarui, dan menghapus konten. Untuk otentikasi tanpa mengekspos kata sandi utama akun, WordPress menyediakan fitur <em>Application Passwords</em> (standar sejak WordPress 5.6).</p>
+<h4>2. Hermes Agent (Nous Research)</h4>
+<p>Hermes Agent adalah platform agen AI otonom sumber terbuka (<em>open-source</em>) yang dirancang khusus untuk memahami instruksi kompleks, bernalar (<em>reasoning</em>), dan memanggil modul alat (<em>tools</em> &amp; <em>skills</em>). Hermes Agent dilengkapi dengan supervisor proses internal (<code>s6-overlay</code>) dan <em>messaging gateway</em> bawaan untuk platform perpesanan seperti Telegram, Discord, dan Slack.</p>
+<h4>3. 9Router (AI Gateway &amp; Router Proxy)</h4>
+<p>9Router (<code>decolua/9router</code>) adalah AI Gateway lokal yang menggabungkan lebih dari 40+ penyedia LLM ke dalam satu endpoint standar OpenAI-compatible (<code>/v1</code>). 9Router mengelola load balancing, failover/fallback otomatis, dan kompresi token (<em>RTK Token Saver</em>) serta dilengkapi dashboard web untuk administrasi.</p>
+<h4>4. Telegram Bot API</h4>
+<p>Telegram Bot API menyediakan antarmuka pertukaran pesan antara bot dan pengguna. Pada proyek ini, gateway Hermes menggunakan metode <em>long polling</em>, sehingga bot tidak memerlukan IP publik statis atau domain HTTPS untuk menerima pesan dari Telegram.</p>
+<hr />
+<h3>2.2 Konsep Integrasi Multi-Container &amp; Isolasi Docker Networking</h3>
+<p>Dalam implementasi arsitektur perangkat lunak modern, penggunaan container Docker menjamin portabilitas, isolasi dependensi, dan kemudahan deployment. Proyek ini mengimplementasikan konsep <em>Single Internal Bridge Network</em> bernama <code>hermes-net</code>:</p>
+<ol>
+<li><strong>Internal Service Discovery (DNS Docker)</strong>:
+Masing-masing container dapat berkomunikasi secara langsung menggunakan nama layanan (<em>service name</em>) sebagai hostname, tanpa memerlukan IP statis:
+<ul>
+<li>Hermes Agent menghubungi 9Router via <code>http://9router:11000/v1</code>.</li>
+<li>Hermes Agent menghubungi WordPress via <code>http://wordpress:80</code>.</li>
+<li>WordPress menghubungi database MariaDB via <code>db:3306</code>.</li>
+</ul>
+</li>
+<li><strong>Prinsip Minimasi Port Publik (Least Privilege Exposure)</strong>:
+<ul>
+<li>Port database MariaDB (<code>3306</code>) <strong>tidak diekspos</strong> ke komputer host maupun jaringan luar. Database hanya dapat dijangkau oleh container WordPress di dalam <code>hermes-net</code>.</li>
+<li>Port 9Router (<code>11000</code>) dan WordPress (<code>10000</code>) dipetakan ke host agar administrator dapat mengakses dashboard web di browser lokal.</li>
+</ul>
+</li>
+<li><strong>Persistensi Data Host (Bind Mounts)</strong>:
+Semua data kritis (database SQLite 9Router, database MariaDB, uploads WordPress, dan memory agen Hermes) dipetakan ke direktori lokal <code>./data/</code> di host, sehingga data tetap utuh ketika container di-restart atau di-update.</li>
+</ol>
+<hr />
+<h3>2.3 Konsep Integrasi Telegram Messaging Gateway (Hermes Agent)</h3>
+<p>Hermes Agent container dilengkapi subsistem <em>Messaging Gateway</em> yang bertindak sebagai penghubung antara platform obrolan Telegram dan mesin inferensi AI:</p>
+<ol>
+<li><strong>Protokol Long Polling vs Webhook</strong>:
+<ul>
+<li>Webhook memerlukan server ber-IP publik dengan sertifikat SSL/HTTPS yang valid agar server Telegram dapat mengirimkan <em>HTTP POST callback</em>.</li>
+<li>Proyek ini menggunakan <strong>Long Polling</strong>: Container Hermes yang secara aktif membuka koneksi HTTPS <em>outgoing</em> keluar ke <code>https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates</code>. Dengan metode ini, bot dapat beroperasi di balik firewall, NAT, atau jaringan lokal (localhost) tanpa port forwarding.</li>
+</ul>
+</li>
+<li><strong>Mekanisme Keamanan Whitelisting (<code>TELEGRAM_ALLOWED_USERS</code>)</strong>:
+Untuk mencegah pihak tidak bertanggung jawab memanipulasi konten website melalui bot Telegram publik, gateway Hermes mengimplementasikan otorisasi ketat:
+<ul>
+<li>Gateway mengekstrak ID numerik pengirim pesan Telegram.</li>
+<li>Pesan hanya diproses jika ID tersebut cocok dengan variabel <code>TELEGRAM_ALLOWED_USERS</code> (contoh: <code>1519048838</code>).</li>
+<li>Setiap pesan dari akun lain akan diabaikan secara otomatis di layer gateway sebelum mencapai model AI.</li>
+</ul>
+</li>
+<li><strong>Supervisi Proses (<code>s6-overlay</code>)</strong>:
+Di dalam container <code>nousresearch/hermes-agent</code>, gateway berjalan di bawah pengawasan manajer proses <code>s6-rc</code>. Jika koneksi Telegram mengalami <em>timeout</em> atau <em>packet drop</em>, proses gateway akan dipulihkan (<em>auto-restart</em>) secara otomatis tanpa mematikan container.</li>
+</ol>
+<hr />
+<h3>2.4 Konsep Integrasi 9Router AI Gateway &amp; Token Optimization</h3>
+<p>9Router memegang peranan krusial sebagai <em>middleware provider</em> kecerdasan buatan dalam arsitektur sistem:</p>
+<ol>
+<li><strong>Unifikasi API Interface (OpenAI Compatibility)</strong>:
+Penyedia LLM memiliki format payload request yang berbeda-beda. 9Router menyatukan semua provider ke dalam skema standar <code>POST /v1/chat/completions</code>. Dengan demikian, Hermes Agent cukup dikonfigurasi sekali menggunakan protokol standar OpenAI, sementara pergantian model (Google Gemini, Claude, OpenAI) dapat diatur di 9Router tanpa mengubah kode agen.</li>
+<li><strong>RTK (Real-Time Token Saver)</strong>:
+9Router dilengkapi algoritma kompresi hasil eksekusi alat (<em>tool results compression</em>) yang mampu menghemat konsumsi token prompt antara 20% hingga 40%, mempercepat <em>Time-To-First-Token</em> (TTFT) dan menghemat biaya API.</li>
+<li><strong>Manajemen Kredensial Terpusat</strong>:
+Kunci API penyedia cloud (Google Gemini / Antigravity OAuth) disimpan aman di dalam database SQLite lokal 9Router (<code>data.sqlite</code>). Container lain tidak perlu mengetahui kredensial Google, melainkan hanya menggunakan token lokal <code>sk-3a0d368df8fd...</code> yang diterbitkan oleh 9Router.</li>
+</ol>
+<hr />
+<h3>2.5 Konsep Integrasi WordPress REST API &amp; Headless CMS Pattern</h3>
+<p>WordPress difungsikan sebagai <em>Headless CMS</em> dan <em>Presentation Layer</em>:</p>
+<ol>
+<li><strong>Pemisahan Antarmuka &amp; Konten</strong>:
+Pengguna tidak berinteraksi langsung dengan formulir editor Gutenberg di browser. Seluruh siklus hidup konten (draf, publikasi, revisi, penghapusan) dikontrol melalui <em>RESTful HTTP Request</em>.</li>
+<li><strong>Otentikasi Aman Menggunakan Application Passwords</strong>:
+WordPress 5.6+ memperkenalkan fitur kata sandi aplikasi 24-karakter (contoh: <code>Zuk0qOL8OM3X40eYDg89O4R0</code>). Kredensial ini digunakan dalam format <em>HTTP Basic Authentication</em>:
+$$\text{Authorization: Basic } \text{base64}(\text{username} : \text{app_password})$$
+Keuntungan utamanya adalah hak akses dapat dicabut (<em>revoke</em>) kapan saja tanpa mempengaruhi kata sandi login utama admin.</li>
+<li><strong>Penyesuaian Lingkungan Non-HTTPS (Localhost Bypass)</strong>:
+Secara standar, WordPress memblokir Application Passwords pada koneksi HTTP demi keamanan transmisi data. Pada arsitektur Docker tertutup ini, batasan tersebut dibuka secara terisolasi menggunakan <em>Must-Use Plugin</em> (<code>mu-plugins</code>), sehingga REST API dapat menerima perintah autentikasi internal.</li>
+</ol>
+<hr />
+<h3>2.6 Konsep Cognitive Tool Calling &amp; Autonomous Skill Execution</h3>
+<p>Sistem memisahkan antara <strong>Penalaran Kognitif</strong> (<em>Cognitive Reasoning</em>) dan <strong>Eksekusi Deterministik</strong> (<em>Deterministic Execution</em>):</p>
+<ol>
+<li><strong>Penalaran Kognitif (LLM via 9Router)</strong>:
+Ketika pengguna mengirimkan instruksi bebas seperti <em>&quot;Tolong buat artikel tentang tren AI 2026&quot;</em>, model bahasa bertugas menyusun struktur artikel, memilih judul yang relevan, menulis paragraf pendahuluan, isi, poin-poin penting, dan kesimpulan dalam format HTML yang valid.</li>
+<li><strong>Eksekusi Deterministik (Hermes Custom Skill)</strong>:
+Hermes membaca manual kerja di [<strong><code>SKILL.md</code></strong>](file:///home/ichwal/Documents/tugas-project/hermes/skills/wordpress-manager/SKILL.md) dan menerjemahkan hasil draf menjadi perintah CLI:
+<code>python3 wp_manager.py create-post --title &quot;...&quot; --content &quot;...&quot; --status publish</code></li>
+<li><strong>Feedback Loop ke Pengguna</strong>:
+Script mengembalikan respons JSON berisi Post ID dan link publik, yang kemudian dirangkum oleh Hermes menjadi pesan konfirmasi ramah yang dikirimkan kembali ke Telegram pengguna.</li>
+</ol>
+<hr />
+<h3>2.7 Topologi Arsitektur &amp; Sequence Diagram Interaksi</h3>
+<h4>Topologi Container Jaringan</h4>
+<div class="mermaid-container">
+  <div class="mermaid">
+flowchart TD
+    User(["Pengguna / Admin"]) <-->|"Pesan Bahasa Alami"| TelegramApp["Aplikasi Telegram"]
+    TelegramApp <-->|"Telegram Bot API (Long Polling)"| Hermes["Container: hermes-agent"]
+    
+    subgraph DockerNet ["Docker Internal Network (hermes-net)"]
+        Hermes -->|"1. Penalaran & Draf Artikel"| NineRouter["Container: 9router (Port 11000)"]
+        NineRouter -->|"2. Respon Model LLM"| Hermes
+        
+        Hermes -->|"3. Eksekusi REST API wp_manager.py"| WordPress["Container: wordpress (Port 10000)"]
+        WordPress <--> MariaDB[("Container: mariadb (Port 3306)")]
+    end
+    
+    NineRouter <-->|"Upstream OAuth / API Key"| GeminiAPI["Google Gemini LLM Cloud"]
+    WordPress -.->|"Port 10000 (HTTP)"| VisitorBrowser(["Browser Pengunjung"])
+  </div>
+</div>
+<h4>Sequence Diagram Interaksi</h4>
+<div class="mermaid-container">
+  <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor Pengguna as Pengguna (Telegram)
+    participant TG as Telegram Bot Gateway
+    participant Hermes as Hermes Autonomous Agent
+    participant Router as 9Router (Port 11000)
+    participant LLM as Google Gemini Cloud
+    participant WP as WordPress REST API (Port 10000)
+
+    Pengguna->>TG: Tolong buatkan artikel tentang Tips Keamanan Siber 2026
+    TG->>Hermes: Parsing update pesan Telegram (Long Polling)
+    Note over Hermes: Hermes mengaktifkan skill wordpress-manager
+    Hermes->>Router: POST /v1/chat/completions (Model ag/gemini-3.8-flash)
+    Router->>LLM: Forward request ke Google Gemini
+    LLM-->>Router: Response stream teks artikel berformat HTML
+    Router-->>Hermes: Konten lengkap artikel (Judul, Subjudul, Paragraf)
+    Hermes->>Hermes: Menjalankan wp_manager.py create-post
+    Hermes->>WP: POST /wp-json/wp/v2/posts (Auth Basic App Password)
+    WP-->>Hermes: HTTP 201 Created (Post ID 15)
+    Hermes->>TG: Artikel berhasil dipublikasikan! URL http://localhost:10000/?p=15
+    TG->>Pengguna: Mengirim pesan balasan konfirmasi
+  </div>
+</div>
+<hr />
+<h2>BAB III: LANGKAH-LANGKAH IMPLEMENTASI &amp; KONFIGURASI</h2>
+<h3>3.1 Prasyarat Sistem &amp; Dependensi</h3>
+<p>Sebelum instalasi dijalankan, server atau komputer host harus memenuhi spesifikasi berikut:</p>
+<ul>
+<li><strong>Sistem Operasi</strong>: Linux (Ubuntu/Debian recommended).</li>
+<li><strong>Docker Engine</strong>: Versi 24.0+ atau lebih baru.</li>
+<li><strong>Docker Compose</strong>: Versi 2.0+ (plugin <code>docker compose</code>).</li>
+<li><strong>Python</strong>: Versi 3.10+ (untuk script pembantu di host).</li>
+<li><strong>Akun Telegram</strong>: Untuk registrasi bot melalui <code>@BotFather</code> dan perolehan ID numerik melalui <code>@userinfobot</code>.</li>
+</ul>
+<hr />
+<h3>3.2 Struktur Direktori Proyek</h3>
+<p>Proyek disusun dengan struktur direktori modular di <code>/home/ichwal/Documents/tugas-project</code>:</p>
+<pre><code class="language-text">tugas-project/
+├── docker-compose.yml              # Konfigurasi orkestrasi 5 container
+├── .env                            # Variabel lingkungan aktif (kredensial &amp; konfigurasi)
+├── .env.example                    # Template variabel lingkungan
+├── setup.sh                        # Script instalasi &amp; inisialisasi otomatis
+├── test_integration.py             # Script pengujian konektivitas &amp; CRUD
+├── README.md                       # Panduan cepat penggunaan
+├── hermes/
+│   ├── config.yaml                 # Konfigurasi provider custom &amp; model default
+│   └── skills/
+│       └── wordpress-manager/
+│           ├── SKILL.md            # Definisi kemampuan agen (standard agentskills.io)
+│           └── scripts/
+│               └── wp_manager.py   # CLI wrapper Python untuk REST API WordPress
+└── data/                           # Mount volume persisten (host storage)
+    ├── 9router/                    # Database sqlite &amp; catalog 9Router
+    ├── mariadb/                    # File database MariaDB
+    ├── wordpress/                  # Source code &amp; upload WordPress (wp-content)
+    └── hermes/                     # Sesi percakapan, memory, &amp; cache agen
+</code></pre>
+<hr />
+<h3>3.3 Orkestrasi Layanan Menggunakan Docker Compose</h3>
+<p>File <code>docker-compose.yml</code> mendefinisikan seluruh service, pemetaan port, dan volume persisten:</p>
+<pre><code class="language-yaml">services:
+  9router:
+    image: decolua/9router:latest
+    container_name: 9router
+    restart: unless-stopped
+    environment:
+      - PORT=${ROUTER_PORT:-11000}
+      - DATA_DIR=/app/data
+      - INITIAL_PASSWORD=${ROUTER_PASSWORD:-admin123456}
+    ports:
+      - &quot;${ROUTER_PORT:-11000}:${ROUTER_PORT:-11000}&quot;
+    volumes:
+      - ./data/9router:/app/data
+    networks:
+      - hermes-net
+
+  db:
+    image: mariadb:10.11
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${DB_NAME:-wordpress}
+      - MYSQL_USER=${DB_USER:-wpuser}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-wppassword}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-rootsecret}
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+    networks:
+      - hermes-net
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=${DB_USER:-wpuser}
+      - WORDPRESS_DB_PASSWORD=${DB_PASSWORD:-wppassword}
+      - WORDPRESS_DB_NAME=${DB_NAME:-wordpress}
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_CONFIG_EXTRA=define('WP_HOME', 'http://localhost:${WP_PORT:-10000}'); define('WP_SITEURL', 'http://localhost:${WP_PORT:-10000}');
+    ports:
+      - &quot;${WP_PORT:-10000}:80&quot;
+    volumes:
+      - ./data/wordpress:/var/www/html
+    networks:
+      - hermes-net
+
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-agent
+    restart: unless-stopped
+    depends_on:
+      - 9router
+      - wordpress
+    command: [&quot;hermes&quot;, &quot;gateway&quot;, &quot;run&quot;]
+    environment:
+      - OPENAI_BASE_URL=http://9router:${ROUTER_PORT:-11000}/v1
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - MODEL=${HERMES_MODEL:-ag/gemini-3.8-flash}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
+      - WORDPRESS_URL=http://wordpress:80
+      - WORDPRESS_USER=${WP_ADMIN_USER:-admin}
+      - WORDPRESS_APP_PASSWORD=${WP_APP_PASSWORD}
+    volumes:
+      - ./data/hermes:/opt/data
+      - ./hermes/skills/wordpress-manager:/opt/data/skills/wordpress-manager
+      - ./hermes/skills/wordpress-manager:/opt/data/.hermes/skills/wordpress-manager
+    networks:
+      - hermes-net
+
+  wpcli:
+    image: wordpress:cli
+    container_name: wpcli
+    user: &quot;33:33&quot;
+    depends_on:
+      - db
+      - wordpress
+    volumes:
+      - ./data/wordpress:/var/www/html
+    networks:
+      - hermes-net
+    profiles:
+      - tools
+
+networks:
+  hermes-net:
+    driver: bridge
+</code></pre>
+<hr />
+<h3>3.4 Konfigurasi Lingkungan Terpusat (<code>.env</code>)</h3>
+<p>Seluruh kredensial sensitif dan variabel port dikelola secara terpusat pada file <code>.env</code>:</p>
+<pre><code class="language-env"># Port Layanan
+WP_PORT=10000
+ROUTER_PORT=11000
+
+# Database MariaDB
+DB_NAME=wordpress
+DB_USER=wpuser
+DB_PASSWORD=wppassword123
+DB_ROOT_PASSWORD=mariadb_root_secret
+
+# WordPress Admin
+WP_URL=http://localhost:10000
+WP_ADMIN_USER=ichwal
+WP_ADMIN_PASSWORD=adminsecretpassword
+WP_ADMIN_EMAIL=13020230049@student.umi.ac.id
+WP_SITE_TITLE=&quot;Portal AI Hermes&quot;
+
+# WordPress Application Password untuk REST API
+WP_APP_PASSWORD=Zuk0qOL8OM3X40eYDg89O4R0
+
+# 9Router AI Gateway
+ROUTER_PASSWORD=admin123456
+OPENAI_API_KEY=sk-3a0d368df8fd6ca3-b8185d-2e99715f
+HERMES_MODEL=ag/gemini-3.8-flash
+
+# Telegram Bot Kredensial
+TELEGRAM_BOT_TOKEN=9030466006:AAGkpMK6MOLWwGy1epTGCciDmWAr-OTlZ9M
+TELEGRAM_ALLOWED_USERS=1519048838
+</code></pre>
+<hr />
+<h3>3.5 Pengembangan Custom Skill Hermes (<code>SKILL.md</code> &amp; <code>wp_manager.py</code>)</h3>
+<h4>1. File Spesifikasi Kemampuan: <code>hermes/skills/wordpress-manager/SKILL.md</code></h4>
+<p>Mengikuti standar <em>agentskills.io</em>, skill ini mengajarkan Hermes cara mengeksekusi script Python dan memformat artikel HTML:</p>
+<pre><code class="language-markdown">---
+name: wordpress-manager
+description: Manage and publish content to WordPress via REST API. Create, edit, list, and delete WordPress posts or pages directly from chat commands.
+version: 1.0.0
+author: Antigravity
+metadata:
+  hermes:
+    tags: [CMS, WordPress, Publishing]
+---
+
+# WordPress Manager Skill
+Gunakan skill ini ketika pengguna di Telegram meminta pembuatan artikel, pembaruan konten, atau penampilan postingan WordPress.
+
+## Instruksi Workflow
+1. Susun konten dengan format HTML rapi (gunakan &lt;h2&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt;).
+2. Jalankan perintah pembuatan pos:
+   python3 /opt/data/skills/wordpress-manager/scripts/wp_manager.py create-post \
+     --title &quot;Judul Artikel&quot; \
+     --content &quot;&lt;p&gt;Isi artikel...&lt;/p&gt;&quot; \
+     --status publish
+3. Kirimkan laporan konfirmasi beserta tautan artikel ke Telegram pengguna.
+</code></pre>
+<h4>2. File Script CLI: <code>hermes/skills/wordpress-manager/scripts/wp_manager.py</code></h4>
+<p>Script ini dirancang tanpa library pihak ketiga (hanya menggunakan library bawaan Python <code>urllib</code>, <code>json</code>, <code>base64</code>, <code>argparse</code>) sehingga dapat berjalan langsung di container Hermes tanpa perlu <code>pip install</code>.</p>
+<hr />
+<h3>3.6 Konfigurasi AI Gateway 9Router &amp; Upstream Google Gemini</h3>
+<ol>
+<li><strong>Dashboard Login</strong>: 9Router dapat diakses pada browser di <code>http://localhost:11000</code> dengan password <code>admin123456</code> (didefinisikan via <code>INITIAL_PASSWORD</code>).</li>
+<li><strong>Koneksi Akun AI</strong>: Akun Google/Antigravity OAuth dihubungkan langsung melalui dashboard 9Router.</li>
+<li><strong>Penerbitan Kunci API</strong>: 9Router menghasilkan API key lokal <code>sk-3a0d368df8fd6ca3-b8185d-2e99715f</code>.</li>
+<li><strong>Katalog Model</strong>: Model <code>ag/gemini-3.8-flash</code> dipilih karena memiliki kecepatan inferensi tinggi dan kemampuan penalaran (<em>reasoning</em>) yang sangat baik untuk pembentukan format artikel HTML.</li>
+</ol>
+<hr />
+<h3>3.7 Integrasi WordPress REST API &amp; Application Password</h3>
+<p>Untuk memastikan WordPress mengizinkan operasi REST API tanpa batasan, diterapkan dua penyesuaian penting:</p>
+<ol>
+<li><strong>Mod-Rewrite Pretty Permalinks</strong>: Struktur URL diatur ke <code>/%postname%/</code> agar endpoint <code>/wp-json/wp/v2/posts</code> dapat diakses langsung oleh Apache Web Server.</li>
+<li><strong>Filter Application Password pada HTTP</strong>: Secara default, WordPress menonaktifkan <em>Application Passwords</em> jika website tidak menggunakan HTTPS. Karena sistem berjalan pada lingkungan internal (<code>http://localhost:10000</code>), dibuat Must-Use Plugin (<code>mu-plugins/enable-app-passwords.php</code>):<pre><code class="language-php">&lt;?php
+/**
+ * Plugin Name: Enable Application Passwords on HTTP
+ */
+add_filter( 'wp_is_application_passwords_available', '__return_true' );
+</code></pre>
+</li>
+</ol>
+<hr />
+<h3>3.8 Script Inisialisasi Otomatis (<code>setup.sh</code>)</h3>
+<p>Script <code>setup.sh</code> disediakan agar seluruh tahapan deployment dapat dieksekusi dengan satu kali perintah:</p>
+<pre><code class="language-bash">chmod +x setup.sh
+./setup.sh
+</code></pre>
+<p>Tahapan yang dieksekusi script:</p>
+<ol>
+<li>Validasi ketersediaan Docker Engine &amp; Docker Compose.</li>
+<li>Pembuatan struktur direktori persistent <code>./data/</code>.</li>
+<li>Menjalankan MariaDB dan WordPress (<code>docker compose up -d db wordpress</code>).</li>
+<li>Melakukan instalasi WordPress otomatis melalui WP-CLI jika database baru diinisialisasi.</li>
+<li>Mengaktifkan <em>Must-Use Plugin</em> dan rewrite rules Apache.</li>
+<li>Menghasilkan <em>WordPress Application Password</em> dan menyimpannya ke <code>.env</code>.</li>
+<li>Menjalankan container 9Router dan Hermes Agent.</li>
+</ol>
+<hr />
+<h2>BAB IV: PENGUJIAN, HASIL, DAN ANALISIS MASALAH</h2>
+<h3>4.1 Rencana Pengujian</h3>
+<p>Pengujian dilakukan secara bertingkat:</p>
+<ol>
+<li><strong>Pengujian Sintaks &amp; Konfigurasi</strong>: Validasi <code>docker-compose.yml</code> dan script Python.</li>
+<li><strong>Pengujian Konektivitas HTTP Endpoint</strong>: Verifikasi ketersediaan port 10000 (WordPress) dan port 11000 (9Router).</li>
+<li><strong>Pengujian Operasi CRUD REST API</strong>: Verifikasi hak akses Application Password.</li>
+<li><strong>Pengujian End-to-End Chatbot</strong>: Pengiriman instruksi bahasa alami via Telegram.</li>
+</ol>
+<hr />
+<h3>4.2 Uji Otomatisasi Sistem (<code>test_integration.py</code>)</h3>
+<p>Eksekusi script pengujian integrasi menghasilkan status <strong>4/4 PASS</strong>:</p>
+<pre><code class="language-text">$ python3 test_integration.py
+======================================================
+  Uji Coba Integrasi: WordPress, Hermes, &amp; 9Router    
+======================================================
+
+[INFO] 1. Menguji validitas syntax docker-compose.yml...
+[PASS] docker-compose.yml valid.
+
+[INFO] 2. Menguji ketersediaan layanan 9Router pada http://localhost:11000...
+[PASS] 9Router aktif dan merespons (HTTP 200).
+
+[INFO] 3. Menguji ketersediaan WordPress pada http://localhost:10000...
+[PASS] WordPress website aktif (HTTP 200).
+[PASS] WordPress REST API aktif di http://localhost:10000/wp-json/wp/v2/posts (HTTP 200).
+
+[INFO] 4. Menguji eksekusi script hermes skill wp_manager.py...
+[PASS] Berhasil membuat postingan draft (Post ID: 6)
+[PASS] Postingan uji coba (ID: 6) berhasil dihapus kembali (Cleanup OK).
+
+======================================================
+Hasil Pengujian: 4/4 Langkah Berhasil.
+======================================================
+</code></pre>
+<hr />
+<h3>4.3 Uji Coba Fungsional Telegram ke WordPress</h3>
+<h4>Skenario 1: Penerbitan Artikel Baru</h4>
+<ul>
+<li><strong>Perintah Pengguna di Telegram</strong>:
+<blockquote>
+<p><em>&quot;Halo Hermes, tolong buatkan postingan blog baru dengan judul 'Masa Depan AI di Tahun 2026' dengan 5 poin penting.&quot;</em></p>
+</blockquote>
+</li>
+<li><strong>Aktivitas Sistem</strong>:
+<ol>
+<li>Hermes Gateway mendeteksi pesan masuk dari User ID <code>1519048838</code>.</li>
+<li>Hermes meneruskan prompt ke 9Router (<code>http://9router:11000/v1/chat/completions</code>) menggunakan model <code>ag/gemini-3.8-flash</code>.</li>
+<li>9Router merutekan request ke Google Gemini dan mengembalikan konten HTML.</li>
+<li>Hermes mengeksekusi <code>wp_manager.py create-post --title ... --content ... --status publish</code>.</li>
+<li>WordPress REST API merespons dengan status <code>201 Created</code>.</li>
+</ol>
+</li>
+<li><strong>Balasan Bot di Telegram</strong>:
+<blockquote>
+<p><em>&quot;Artikel berhasil dipublikasikan ke WordPress! Post ID: 5. Anda dapat melihatnya di: http://localhost:10000/?p=5&quot;</em></p>
+</blockquote>
+</li>
+<li><strong>Hasil Verifikasi Web</strong>: Artikel langsung tampil di beranda WordPress pada port 10000.</li>
+</ul>
+<h4>Skenario 2: Menampilkan Daftar Artikel</h4>
+<ul>
+<li><strong>Perintah Pengguna</strong>: <em>&quot;Tampilkan 5 postingan terakhir yang ada di WordPress.&quot;</em></li>
+<li><strong>Aktivitas Sistem</strong>: Hermes mengeksekusi <code>wp_manager.py list-posts --limit 5</code> dan merangkum judul serta link ke dalam format pesan Telegram.</li>
+</ul>
+<hr />
+<h3>4.4 Analisis Kendala &amp; Solusi Teknis (Troubleshooting)</h3>
+<p>Selama proses pengerjaan proyek, terdapat beberapa kendala teknis yang berhasil diidentifikasi dan diselesaikan:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">No</th>
+<th style="text-align:left">Gejala Masalah</th>
+<th style="text-align:left">Penyebab Teknis</th>
+<th style="text-align:left">Solusi yang Diterapkan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>Login 9Router Gagal (Password Salah)</strong></td>
+<td style="text-align:left">Container 9Router di-generate sebelum variabel <code>INITIAL_PASSWORD</code> dimasukkan ke <code>docker-compose.yml</code>, sehingga sistem memakai fallback default <code>123456</code>.</td>
+<td style="text-align:left">Menambahkan <code>INITIAL_PASSWORD=${ROUTER_PASSWORD:-admin123456}</code> pada konfigurasi service 9router, lalu menjalankan <code>docker compose up -d --force-recreate 9router</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>WordPress REST API Error 404</strong></td>
+<td style="text-align:left">Pada instalasi baru WordPress, permalink default adalah <em>plain</em> (<code>?p=123</code>), sehingga rute <code>/wp-json/</code> belum di-rewrite oleh Apache.</td>
+<td style="text-align:left">Menjalankan <code>wp rewrite structure '/%postname%/'</code> dan menambahkan file <code>.htaccess</code> standar WordPress dengan directive <code>mod_rewrite</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>WordPress REST API Error 401 (Unauthorized)</strong></td>
+<td style="text-align:left">Fitur <em>Application Passwords</em> WordPress secara default dinonaktifkan pada koneksi non-HTTPS (HTTP localhost).</td>
+<td style="text-align:left">Membuat Must-Use Plugin <code>mu-plugins/enable-app-passwords.php</code> dengan filter <code>wp_is_application_passwords_available =&gt; __return_true</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>Strip Authorization Header oleh Apache</strong></td>
+<td style="text-align:left">Server Apache pada container resmi WordPress sering kali memotong HTTP header <code>Authorization</code> sebelum sampai ke PHP.</td>
+<td style="text-align:left">Menambahkan rule rewrite: <code>RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]</code> pada file <code>.htaccess</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>Hermes Gagal Autentikasi ke 9Router</strong></td>
+<td style="text-align:left">Nilai default <code>OPENAI_API_KEY</code> pada <code>.env</code> awalnya terisi teks placeholder <code>9router</code> yang belum terdaftar di database 9Router.</td>
+<td style="text-align:left">Mengambil API key riil dari database SQLite 9Router (<code>sk-3a0d368df8fd6ca3...</code>) dan memasukkannya ke variabel <code>OPENAI_API_KEY</code> di file <code>.env</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>BAB V: KESIMPULAN DAN SARAN</h2>
+<h3>5.1 Kesimpulan</h3>
+<ol>
+<li><strong>Keberhasilan Integrasi Multi-Container</strong>: Proyek ini berhasil mengintegrasikan WordPress (port 10000), 9Router (port 11000), MariaDB (port 3306), dan Hermes Agent dalam satu jaringan bridge Docker yang terisolasi dan stabil.</li>
+<li><strong>Otomatisasi Tanpa Batas Ruang</strong>: Pengguna dapat mengelola, membuat, dan memodifikasi konten website langsung dari smartphone melalui aplikasi Telegram tanpa perlu membuka komputer atau login ke dashboard wp-admin.</li>
+<li><strong>Efisiensi Routing AI</strong>: Pemanfaatan 9Router terbukti efektif sebagai lapisan perantara (<em>middleware</em>) yang menyederhanakan manajemen token, autentikasi OAuth, serta penyediaan antarmuka OpenAI-compatible untuk agen cerdas.</li>
+<li><strong>Sistem Mandiri &amp; Tahan Gangguan</strong>: Seluruh layanan dilengkapi mekanisme restart otomatis (<code>restart: unless-stopped</code>) dan supervisor proses internal (<code>s6-overlay</code>), memastikan gateway bot tetap aktif dan mampu pulih secara mandiri jika terjadi gangguan jaringan.</li>
+</ol>
+<h3>5.2 Saran Pengembangan</h3>
+<ol>
+<li><strong>Implementasi SSL/TLS (HTTPS)</strong>: Menerapkan reverse proxy Nginx atau Traefik dengan sertifikat Let's Encrypt untuk mengamankan komunikasi publik ketika sistem di-deploy ke Virtual Private Server (VPS).</li>
+<li><strong>Dukungan Media &amp; Gambar</strong>: Mengembangkan kemampuan skill <code>wordpress-manager</code> agar dapat menerima unggahan gambar langsung dari Telegram dan memasukkannya ke dalam <em>WordPress Media Library</em> serta menjadikannya <em>Featured Image</em>.</li>
+<li><strong>Multi-Agent Collaboration</strong>: Memanfaatkan fitur <em>delegation</em> pada Hermes Agent agar satu sub-agen bertindak sebagai <em>editor/copywriter</em> dan sub-agen lainnya bertindak sebagai <em>SEO analyzer</em> sebelum konten dipublikasikan.</li>
+</ol>
+<hr />
+<h2>LAMPIRAN: KODE SUMBER UTAMA</h2>
+<h3>1. Script Helper REST API WordPress (<code>wp_manager.py</code>)</h3>
+<p>Lokasi: <code>hermes/skills/wordpress-manager/scripts/wp_manager.py</code></p>
+<pre><code class="language-python">#!/usr/bin/env python3
+&quot;&quot;&quot;
+WordPress REST API CLI Manager for Hermes Agent.
+Uses Python standard library (no external dependencies required).
+&quot;&quot;&quot;
+
+import os
+import sys
+import json
+import base64
+import argparse
+from urllib import request, parse, error
+
+def get_auth_header(user, app_password):
+    credentials = f&quot;{user}:{app_password}&quot;.strip()
+    encoded = base64.b64encode(credentials.encode(&quot;utf-8&quot;)).decode(&quot;utf-8&quot;)
+    return f&quot;Basic {encoded}&quot;
+
+def make_request(url, method=&quot;GET&quot;, data=None, headers=None):
+    if headers is None:
+        headers = {}
+    
+    req_data = None
+    if data is not None:
+        req_data = json.dumps(data).encode(&quot;utf-8&quot;)
+        headers[&quot;Content-Type&quot;] = &quot;application/json&quot;
+    
+    req = request.Request(url, data=req_data, headers=headers, method=method)
+    
+    try:
+        with request.urlopen(req, timeout=30) as response:
+            res_body = response.read().decode(&quot;utf-8&quot;)
+            if res_body:
+                try:
+                    return json.loads(res_body)
+                except json.JSONDecodeError:
+                    return {&quot;raw&quot;: res_body}
+            return {&quot;status&quot;: &quot;success&quot;, &quot;code&quot;: response.status}
+    except error.HTTPError as e:
+        error_body = e.read().decode(&quot;utf-8&quot;)
+        try:
+            err_json = json.loads(error_body)
+            msg = err_json.get(&quot;message&quot;, error_body)
+        except Exception:
+            msg = error_body
+        sys.stderr.write(f&quot;HTTP Error {e.code}: {msg}\n&quot;)
+        sys.exit(1)
+    except error.URLError as e:
+        sys.stderr.write(f&quot;Connection Error: {e.reason}\n&quot;)
+        sys.exit(1)
+
+def main():
+    parser = argparse.ArgumentParser(description=&quot;WordPress REST API Manager for Hermes Agent&quot;)
+    parser.add_argument(&quot;--url&quot;, help=&quot;WordPress URL&quot;)
+    parser.add_argument(&quot;--user&quot;, help=&quot;WordPress User&quot;)
+    parser.add_argument(&quot;--password&quot;, help=&quot;WordPress Application Password&quot;)
+
+    subparsers = parser.add_subparsers(dest=&quot;command&quot;, required=True)
+
+    # list-posts
+    list_p = subparsers.add_parser(&quot;list-posts&quot;, help=&quot;List recent WordPress posts&quot;)
+    list_p.add_argument(&quot;--limit&quot;, type=int, default=10, help=&quot;Number of posts to return&quot;)
+    list_p.add_argument(&quot;--status&quot;, default=&quot;any&quot;, help=&quot;Status filter: any, publish, draft, trash&quot;)
+
+    # get-post
+    get_p = subparsers.add_parser(&quot;get-post&quot;, help=&quot;Get a single post by ID&quot;)
+    get_p.add_argument(&quot;--id&quot;, type=int, required=True, help=&quot;Post ID&quot;)
+
+    # create-post
+    create_p = subparsers.add_parser(&quot;create-post&quot;, help=&quot;Create a new WordPress post&quot;)
+    create_p.add_argument(&quot;--title&quot;, required=True, help=&quot;Post title&quot;)
+    create_p.add_argument(&quot;--content&quot;, required=True, help=&quot;Post content (HTML supported)&quot;)
+    create_p.add_argument(&quot;--status&quot;, default=&quot;publish&quot;, choices=[&quot;publish&quot;, &quot;draft&quot;, &quot;private&quot;], help=&quot;Post status&quot;)
+    create_p.add_argument(&quot;--categories&quot;, help=&quot;Comma-separated category IDs&quot;)
+
+    # update-post
+    update_p = subparsers.add_parser(&quot;update-post&quot;, help=&quot;Update an existing post&quot;)
+    update_p.add_argument(&quot;--id&quot;, type=int, required=True, help=&quot;Post ID to update&quot;)
+    update_p.add_argument(&quot;--title&quot;, help=&quot;New post title&quot;)
+    update_p.add_argument(&quot;--content&quot;, help=&quot;New post content (HTML supported)&quot;)
+    update_p.add_argument(&quot;--status&quot;, choices=[&quot;publish&quot;, &quot;draft&quot;, &quot;private&quot;, &quot;trash&quot;], help=&quot;New post status&quot;)
+
+    # delete-post
+    del_p = subparsers.add_parser(&quot;delete-post&quot;, help=&quot;Delete a post&quot;)
+    del_p.add_argument(&quot;--id&quot;, type=int, required=True, help=&quot;Post ID to delete&quot;)
+    del_p.add_argument(&quot;--force&quot;, action=&quot;store_true&quot;, help=&quot;Bypass trash and permanently delete&quot;)
+
+    args = parser.parse_args()
+
+    wp_url = (args.url or os.environ.get(&quot;WORDPRESS_URL&quot;, &quot;http://wordpress&quot;)).rstrip(&quot;/&quot;)
+    wp_user = args.user or os.environ.get(&quot;WORDPRESS_USER&quot;, &quot;admin&quot;)
+    wp_pass = args.password or os.environ.get(&quot;WORDPRESS_APP_PASSWORD&quot;, &quot;&quot;)
+
+    api_base = f&quot;{wp_url}/wp-json/wp/v2&quot;
+    headers = {&quot;User-Agent&quot;: &quot;Hermes-WordPress-Manager/1.0&quot;}
+    if wp_pass:
+        headers[&quot;Authorization&quot;] = get_auth_header(wp_user, wp_pass)
+
+    if args.command == &quot;list-posts&quot;:
+        query_params = {&quot;per_page&quot;: args.limit}
+        if args.status != &quot;any&quot;:
+            query_params[&quot;status&quot;] = args.status
+        url = f&quot;{api_base}/posts?{parse.urlencode(query_params)}&quot;
+        res = make_request(url, headers=headers)
+        output = [{&quot;id&quot;: p.get(&quot;id&quot;), &quot;title&quot;: p.get(&quot;title&quot;, {}).get(&quot;rendered&quot;, &quot;&quot;), &quot;link&quot;: p.get(&quot;link&quot;)} for p in res]
+        print(json.dumps(output, indent=2, ensure_ascii=False))
+
+    elif args.command == &quot;create-post&quot;:
+        url = f&quot;{api_base}/posts&quot;
+        payload = {&quot;title&quot;: args.title, &quot;content&quot;: args.content, &quot;status&quot;: args.status}
+        post = make_request(url, method=&quot;POST&quot;, data=payload, headers=headers)
+        print(json.dumps({&quot;success&quot;: True, &quot;id&quot;: post.get(&quot;id&quot;), &quot;link&quot;: post.get(&quot;link&quot;)}, indent=2))
+
+    elif args.command == &quot;update-post&quot;:
+        url = f&quot;{api_base}/posts/{args.id}&quot;
+        payload = {}
+        if args.title: payload[&quot;title&quot;] = args.title
+        if args.content: payload[&quot;content&quot;] = args.content
+        if args.status: payload[&quot;status&quot;] = args.status
+        post = make_request(url, method=&quot;POST&quot;, data=payload, headers=headers)
+        print(json.dumps({&quot;success&quot;: True, &quot;id&quot;: post.get(&quot;id&quot;), &quot;link&quot;: post.get(&quot;link&quot;)}, indent=2))
+
+    elif args.command == &quot;delete-post&quot;:
+        query_params = {&quot;force&quot;: &quot;true&quot; if args.force else &quot;false&quot;}
+        url = f&quot;{api_base}/posts/{args.id}?{parse.urlencode(query_params)}&quot;
+        res = make_request(url, method=&quot;DELETE&quot;, headers=headers)
+        print(json.dumps({&quot;success&quot;: True, &quot;action&quot;: &quot;deleted&quot;, &quot;id&quot;: args.id}, indent=2))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<hr />
+<p><em>Laporan ini disusun sebagai dokumentasi teknis pemenuhan tugas besar integrasi sistem dan dapat dikonversi ke format PDF / DOCX sesuai kebutuhan administrasi akademik.</em></p>
+
+  </div>
+
+</body>
+</html>

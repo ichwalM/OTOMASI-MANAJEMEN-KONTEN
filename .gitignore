@@ -1,0 +1,25 @@
+# Environment & Secrets (SANGAT PENTING: Jangan commit kredensial aktif)
+.env
+*.env.local
+
+# Runtime Data Containers (Persistent volumes)
+data/
+data/**
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+env/
+venv/
+
+# Temporary / Preview Files
+/tmp/
+*.tmp
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
